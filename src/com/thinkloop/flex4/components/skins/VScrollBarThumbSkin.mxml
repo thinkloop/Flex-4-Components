@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin 
+	xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark">
+
+	<fx:Metadata>
+		<![CDATA[
+			[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</s:states>
+
+	<!-- background -->
+	<s:Rect width="11" top="5" bottom="5" left="4" right="3" minHeight="14">
+		<s:stroke>
+			<s:SolidColorStroke color="{getStyle('symbolColor')}" />
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="{getStyle('focusColor')}" />
+		</s:fill>
+	</s:Rect>
+</s:SparkSkin>

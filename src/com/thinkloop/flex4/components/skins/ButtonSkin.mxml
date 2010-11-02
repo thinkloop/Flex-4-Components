@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin 
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+			 xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 minWidth="21" minHeight="21" alpha.disabled="0.5"
+			 buttonMode="true">
+
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * META DATA
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<fx:Metadata>
+		<![CDATA[ 
+			[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+	
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * PROPERTIES  
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<fx:Declarations>
+		<fx:String id="upColor">{getStyle('accentColor')}</fx:String>
+		<fx:String id="upBGColor">{getStyle('contentBackgroundColor')}</fx:String>
+		<fx:String id="upBorderColor">{getStyle('borderColor')}</fx:String>
+
+		<fx:String id="overColor">{getStyle('contentBackgroundColor')}</fx:String>
+		<fx:String id="overBGColor">{getStyle('focusColor')}</fx:String>
+		<fx:String id="overBorderColor">{getStyle('symbolColor')}</fx:String>
+		
+		<fx:String id="downColor">{getStyle('contentBackgroundColor')}</fx:String>
+		<fx:String id="downBGColor">{getStyle('accentColor')}</fx:String>
+		<fx:String id="downBorderColor">{getStyle('symbolColor')}</fx:String>
+		
+		<fx:int id="fontSize">{getStyle('fontSize')}</fx:int>
+		
+		<s:Sine id="myEaser" easeInFraction="0.1" />
+	</fx:Declarations>
+	
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * STATES
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</s:states>
+
+	<s:transitions>
+		<s:Transition fromState="*" toState="*">
+			<s:Parallel duration="350">
+				<s:AnimateColor targets="{[bgFill]}" easer="{myEaser}" />
+			</s:Parallel>
+		</s:Transition>	
+	</s:transitions>
+	
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * VIEW
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<s:Rect top="0" bottom="0" left="0" right="0">
+		<s:fill>
+			<s:SolidColor id="bgFill" color="{upBGColor}" color.over="{overBGColor}" color.down="{downBGColor}" alpha="{getStyle('backgroundAlpha')}" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="{upBorderColor}" color.over="{overBorderColor}" color.down="{downBorderColor}" alpha="{getStyle('borderAlpha')}" />
+		</s:stroke>
+	</s:Rect>		
+	
+	<s:Label id="labelDisplay"
+			 paddingLeft="{int(fontSize * 0.9)}" paddingRight="{int(fontSize * 0.9)}" paddingTop="{int(fontSize * 0.2)}" paddingBottom="{int(fontSize  * 0.2)}"
+			 horizontalCenter="0" verticalCenter="0"
+			 textAlign="center" verticalAlign="middle"
+			 maxDisplayedLines="1"
+			 color="{upColor}" color.over="{overColor}" color.down="{downColor}">
+		
+		<s:filters>
+			<s:DropShadowFilter distance="1" alpha="0.4" blurX="4" blurY="4" />
+		</s:filters>		
+	</s:Label>
+</s:SparkSkin>
