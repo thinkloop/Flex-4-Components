@@ -14,7 +14,6 @@ import spark.components.TextInput;
 import spark.components.supportClasses.SkinnableComponent;
 import spark.events.TextOperationEvent;
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * EVENTS
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -26,48 +25,37 @@ import spark.events.TextOperationEvent;
 [Event(name="submitButtonClicked", type="flash.events.Event")]
 [Event(name="clearButtonClicked", type="flash.events.Event")]
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * SKIN STATES
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
-[SkinState("normal")]
 [SkinState("active")]
 [SkinState("searching")]
 [SkinState("disabled")]
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * OTHER METADATA
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
 [DefaultProperty("label")]
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * SEARCH BOX
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
 public class SearchBox extends SkinnableComponent {
 
-	
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * SKIN PARTS
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
-	
-	[SkinPart(required="true")] public var textInput:TextInput;
 	[SkinPart(required="true")] public var searchButton:SearchBoxButton;
+	[SkinPart(required="true")] public var textInput:TextInput;
 	[SkinPart(required="true")] public var clearButton:Button;
 	
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CONSTANTS
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	
 	
 	public static const TEXT_CHANGED:String = 'textChanged';
 	public static const ENTER_KEY_PRESSED:String = 'enterKeyPressed';
@@ -75,16 +63,14 @@ public class SearchBox extends SkinnableComponent {
 	public static const CLEAR_BUTTON_CLICKED:String = 'clearButtonClicked';
 	public static const SUBMIT:String = 'submit';
 	
-	public static const NORMAL_STATE:String = 'normal';
+	public static const NORMAL_STATE:String = '';
 	public static const ACTIVE_STATE:String = 'active';
 	public static const SEARCHING_STATE:String = 'searching';
 	public static const DISABLED_STATE:String = 'disabled';
 	
-	
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CONSTRUCTOR / INIT
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	
 	
 	public function SearchBox() {
 		super();
@@ -95,11 +81,9 @@ public class SearchBox extends SkinnableComponent {
 		addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 	}
 
-	
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * PROPERTIES
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	
 	
 	// text
 	protected var _text:String = '';
@@ -173,6 +157,7 @@ public class SearchBox extends SkinnableComponent {
 	[Bindable]
 	public function set isSearching(value:Boolean):void {
 		_isSearching = value;
+		searchButtonLabel = value ? 'searching' : 'search';
 		invalidateSkinState();
 	}
 	public function get isSearching():Boolean {
@@ -213,6 +198,24 @@ public class SearchBox extends SkinnableComponent {
  * OVERRIDE
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
+	// get current skin state
+	override protected function getCurrentSkinState():String {
+		var returnState:String = NORMAL_STATE;
+		
+		if (!enabled) {
+			returnState = DISABLED_STATE;		
+		}
+			
+		else if (isSearching) {
+			returnState = SEARCHING_STATE;
+		}
+			
+		else if (isRolledOver || isFocusedIn || isTextTyped || isActive) {
+			returnState = ACTIVE_STATE;		
+		}
+	
+		return returnState;
+	}
 	
 	// commit properties
 	override protected function commitProperties():void { 
@@ -237,7 +240,7 @@ public class SearchBox extends SkinnableComponent {
 		}
 		else {
 			textInput.setStyle('color', '#cfcfcf');
-			textInput.text = 'enter search terms';
+			textInput.text = 'type search terms';
 		}
 	}
 	
@@ -288,43 +291,20 @@ public class SearchBox extends SkinnableComponent {
 		}
 	}
 	
-	override protected function getCurrentSkinState():String {
-		var returnState:String = "normal";
-
-		if (!enabled) {
-			returnState = DISABLED_STATE;		
-		}
-			
-		else if (isSearching) {
-			returnState = SEARCHING_STATE;
-		}
-			
-		else if (isRolledOver || isFocusedIn || isTextTyped || isActive) {
-			returnState = ACTIVE_STATE;		
-		}
-			
-		else {
-			returnState = NORMAL_STATE;		
-		}		
-			
-		return returnState;
-	}
-	
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * HANDLERS
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 	
 	// handle search button click
 	protected function searchButton_clickHandler(e:MouseEvent):void { 
-trace('clicked');		
+//trace('search button clicked');
 		dispatchEvent(new Event(SUBMIT_BUTTON_CLICKED));
 		dispatchEvent(new Event(SUBMIT));
 	}
 
 	// handle clear button click
 	protected function clearButton_clickHandler(e:MouseEvent):void { 
-trace('clear button clicked');
+//trace('clear button clicked');
 		text = '';
 		textInput.setFocus();
 	}
@@ -336,7 +316,7 @@ trace('clear button clicked');
 	
 	// handle pressing enter
 	protected function textInput_enterHandler(e:FlexEvent):void { 
-trace('pressed enter');
+//trace('pressed enter');
 		dispatchEvent(new Event(ENTER_KEY_PRESSED));
 		dispatchEvent(new Event(SUBMIT));
 	} 	

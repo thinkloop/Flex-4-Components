@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	alpha.disabled="0.5">
+
+    <fx:Metadata>
+		<![CDATA[
+			[HostComponent("spark.components.ButtonBar")]
+		]]>
+    </fx:Metadata> 
+	
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>
+    
+    <fx:Declarations>
+
+        <fx:Component id="firstButton">
+            <s:ButtonBarButton skinClass="com.thinkloop.flex4.components.skins.ButtonBarFirstButtonSkin" buttonMode="true" />
+        </fx:Component>
+
+        <fx:Component id="middleButton" >
+            <s:ButtonBarButton skinClass="com.thinkloop.flex4.components.skins.ButtonBarMiddleButtonSkin" buttonMode="true" />
+        </fx:Component>
+
+        <fx:Component id="lastButton" >
+            <s:ButtonBarButton skinClass="com.thinkloop.flex4.components.skins.ButtonBarLastButtonSkin" buttonMode="true" />
+        </fx:Component>
+    </fx:Declarations>
+
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * VIEW  
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->	
+	
+    <s:DataGroup id="dataGroup" top="0" width="100%" height="100%">
+        <s:layout>
+            <s:ButtonBarHorizontalLayout gap="0"/>
+        </s:layout>
+    </s:DataGroup>
+</s:Skin>

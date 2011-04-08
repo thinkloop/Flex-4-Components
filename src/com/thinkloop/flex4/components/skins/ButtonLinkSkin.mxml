@@ -21,21 +21,7 @@
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
 	<fx:Declarations>
-		<fx:String id="upColor">{getStyle('accentColor')}</fx:String>
-		<fx:String id="upBGColor">{getStyle('contentBackgroundColor')}</fx:String>
-		<fx:String id="upBorderColor">{getStyle('borderColor')}</fx:String>
-
-		<fx:String id="overColor">{getStyle('contentBackgroundColor')}</fx:String>
-		<fx:String id="overBGColor">{getStyle('focusColor')}</fx:String>
-		<fx:String id="overBorderColor">{getStyle('symbolColor')}</fx:String>
-		
-		<fx:String id="downColor">{getStyle('contentBackgroundColor')}</fx:String>
-		<fx:String id="downBGColor">{getStyle('accentColor')}</fx:String>
-		<fx:String id="downBorderColor">{getStyle('symbolColor')}</fx:String>
-		
 		<fx:int id="fontSize">{getStyle('fontSize')}</fx:int>
-		
-		<s:Sine id="myEaser" easeInFraction="0.1" />
 	</fx:Declarations>
 	
 <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -48,34 +34,29 @@
 		<s:State name="down" />
 		<s:State name="disabled" />
 	</s:states>
-
-	<s:transitions>
-		<s:Transition fromState="*" toState="*">
-			<s:Parallel duration="350">
-				<s:AnimateColor targets="{[bgFill]}" easer="{myEaser}" />
-			</s:Parallel>
-		</s:Transition>	
-	</s:transitions>
 	
+	<!-- states 
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="down" stateGroups="downStates" />
+		<s:State name="disabled" stateGroups="disabledStates" />
+		<s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+		<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+		<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+		<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+	</s:states>
+	-->
 <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* * VIEW
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
-	<s:Rect top="0" bottom="0" left="0" right="0">
-		<s:fill>
-			<s:SolidColor id="bgFill" color="{upBGColor}" color.over="{overBGColor}" color.down="{downBGColor}" alpha="{getStyle('backgroundAlpha')}" />
-		</s:fill>
-		<s:stroke>
-			<s:SolidColorStroke color="{upBorderColor}" color.over="{overBorderColor}" color.down="{downBorderColor}" alpha="{getStyle('borderAlpha')}" />
-		</s:stroke>
-	</s:Rect>
-	
 	<s:Label id="labelDisplay"
-			 paddingLeft="{int(fontSize * 0.9)}" paddingRight="{int(fontSize * 0.9)}" paddingTop="{int(fontSize * 0.2)}" paddingBottom="{int(fontSize  * 0.2)}"
+			 paddingLeft="{ fontSize }" paddingRight="{ fontSize }"
 			 horizontalCenter="0" verticalCenter="0"
 			 textAlign="center" verticalAlign="middle"
 			 maxDisplayedLines="1"
-			 color="{upColor}" color.over="{overColor}" color.down="{downColor}">
+			 color="{ getStyle('focusColor') }" color.over="{ getStyle('accentColor') }" color.down="{ getStyle('accentColor') }">
 		
 		<s:filters>
 			<s:DropShadowFilter distance="1" alpha="0.4" blurX="4" blurY="4" />

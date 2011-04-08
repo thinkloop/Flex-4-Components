@@ -31,13 +31,17 @@ public class SearchBoxButton extends Button {
 			return 'disabled';
 		}
 		
-		else if (superSkinState == 'down') {
+		else if (superSkinState == 'down' || superSkinState == 'over') {
 			return 'down';
 		}
 		
-		else  if (searchBoxSkinState == 'active' || searchBoxSkinState == 'searching') {
-			return 'over';
+		else  if (searchBoxSkinState == 'searching') {
+			return 'down';
 		}
+		
+		else  if (searchBoxSkinState == 'active') {
+			return 'over';
+		}		
 		
 		else {
 			return 'up';

@@ -1,0 +1,34 @@
+package com.thinkloop.flex4 {
+
+import flash.events.Event;
+
+import org.greenthreads.GreenThread;
+
+public class GreenThreadSentencesFilterFunction extends GreenThread {
+	
+	public var sentences:Array;
+	
+	// constructor
+	public function GreenThreadSentencesFilterFunction() {
+		
+		// "true" turns on debug statisitics
+		super( true );
+		
+		// output statistics to console
+		addEventListener( Event.COMPLETE, function( event : Event ) : void {
+			trace( statistics.print() );
+		});
+	}
+	
+	// initialize is invoked every time a greenthread is start()'ed
+	override protected function initialize():void {
+		
+	}
+	
+	// run(): 
+	override protected function run():Boolean {
+		
+trace('=== run ===');		
+		return false;
+	}
+}}

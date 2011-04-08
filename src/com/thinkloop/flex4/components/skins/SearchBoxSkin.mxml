@@ -3,7 +3,7 @@
 	xmlns:fx="http://ns.adobe.com/mxml/2009" 
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
-	xmlns:components="com.thinkloop.flex4.components.*"
+	xmlns:t="com.thinkloop.flex4.components.*"
 	
 	width="100%" height="100%"
 	blendMode="normal">
@@ -89,7 +89,7 @@
 	<!-- search button and text input -->
     <s:HGroup width="100%" height="100%" gap="-1">
 
-		<components:SearchBoxButton id="searchButton"
+		<t:SearchBoxButton id="searchButton"
 						   label="X"
 						   height="100%"
 						   fontWeight="bold"

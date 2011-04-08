@@ -102,7 +102,7 @@
 	<!-- bg -->
 	<s:Rect id="bg" top="0" bottom="0" left="0" right="0">
 		<s:fill>
-			<s:SolidColor id="bgFill" color="{getStyle('contentBackgroundColor')}"  />
+			<s:SolidColor id="bgFill" color="{getStyle('contentBackgroundColor')}" color.disabled="{getStyle('disabledColor')}"  />
 		</s:fill>
 	</s:Rect>
 

@@ -12,7 +12,7 @@
 	
 	<fx:Metadata>
 		<![CDATA[ 
-			[HostComponent("spark.components.Button")]
+			[HostComponent("spark.components.ToggleButton")]
 		]]>
 	</fx:Metadata>
 	
@@ -44,9 +44,13 @@
 	
 	<s:states>
 		<s:State name="up" />
-		<s:State name="over" />
-		<s:State name="down" />
-		<s:State name="disabled" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="down" stateGroups="downStates" />
+		<s:State name="disabled" stateGroups="disabledStates" />
+		<s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+		<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+		<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+		<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
 	</s:states>
 
 	<s:transitions>

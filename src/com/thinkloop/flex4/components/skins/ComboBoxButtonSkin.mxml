@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:SparkSkin 
-			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
-			 xmlns:fx="http://ns.adobe.com/mxml/2009"
-			 xmlns:s="library://ns.adobe.com/flex/spark"
-			 minWidth="21" minHeight="21" alpha.disabled="0.5"
-			 buttonMode="true">
-
+	xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	minWidth="21" minHeight="21" alpha.disabled="0.5"
+	buttonMode="true">
+	
 <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* * META DATA
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+* * META DATA
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
 	<fx:Metadata>
 		<![CDATA[ 
-			[HostComponent("spark.components.Button")]
+		[HostComponent("spark.components.Button")]
 		]]>
 	</fx:Metadata>
-	
+
 <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* * PROPERTIES  
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+* * PROPERTIES  
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
 	<fx:Declarations>
 		<fx:String id="upColor">{getStyle('accentColor')}</fx:String>
 		<fx:String id="upBGColor">{getStyle('contentBackgroundColor')}</fx:String>
 		<fx:String id="upBorderColor">{getStyle('borderColor')}</fx:String>
-
+		
 		<fx:String id="overColor">{getStyle('contentBackgroundColor')}</fx:String>
 		<fx:String id="overBGColor">{getStyle('focusColor')}</fx:String>
 		<fx:String id="overBorderColor">{getStyle('symbolColor')}</fx:String>
@@ -38,7 +38,7 @@
 		<s:Sine id="myEaser" easeInFraction="0.1" />
 	</fx:Declarations>
 	
-<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* * STATES
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
@@ -48,7 +48,7 @@
 		<s:State name="down" />
 		<s:State name="disabled" />
 	</s:states>
-
+	
 	<s:transitions>
 		<s:Transition fromState="*" toState="*">
 			<s:Parallel duration="350">
@@ -58,9 +58,10 @@
 	</s:transitions>
 	
 <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* * VIEW
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+* * VIEW
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 	
+	<!-- bg and border -->
 	<s:Rect top="0" bottom="0" left="0" right="0">
 		<s:fill>
 			<s:SolidColor id="bgFill" color="{upBGColor}" color.over="{overBGColor}" color.down="{downBGColor}" alpha="{getStyle('backgroundAlpha')}" />
@@ -70,6 +71,14 @@
 		</s:stroke>
 	</s:Rect>
 	
+	<!-- arrow -->
+	<s:Path id="arrow" right="6" verticalCenter="0" data="M 4.0 4.0 L 4.0 3.0 L 5.0 3.0 L 5.0 2.0 L 6.0 2.0 L 6.0 1.0 L 7.0 1.0 L 7.0 0.0 L 0.0 0.0 L 0.0 1.0 L 1.0 1.0 L 1.0 2.0 L 2.0 2.0 L 2.0 3.0 L 3.0 3.0 L 3.0 4.0 L 4.0 4.0">
+		<s:fill>
+			<s:SolidColor color="{upColor}" color.over="{overColor}" color.down="{downColor}" />
+		</s:fill>
+	</s:Path>
+	
+	<!--
 	<s:Label id="labelDisplay"
 			 paddingLeft="{int(fontSize * 0.9)}" paddingRight="{int(fontSize * 0.9)}" paddingTop="{int(fontSize * 0.2)}" paddingBottom="{int(fontSize  * 0.2)}"
 			 horizontalCenter="0" verticalCenter="0"
@@ -81,4 +90,5 @@
 			<s:DropShadowFilter distance="1" alpha="0.4" blurX="4" blurY="4" />
 		</s:filters>		
 	</s:Label>
+	-->
 </s:SparkSkin>

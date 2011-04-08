@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+               xmlns:s="library://ns.adobe.com/flex/spark" 
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               initialize="initTree()" >
+    <fx:Script>
+    <![CDATA[	
+		import mx.collections.XMLListCollection;
+		import com.thinkloop.flex4.components.sparkTreeClasses.XMLLinearIList;
+		
+        private var treeDP:XMLLinearIList;
+        private var openNodes:Array;
+
+		[Bindable] public var dp:XML;
+		
+        private function initTree():void
+        {
+            openNodes = [];
+            var nodeB:XMLList = dp.item.(@label == "Node B");
+            openNodes.push(nodeB[0]);
+            treeDP = new XMLLinearIList(dp, openNodes, "*");
+            testTree1.dataProvider = treeDP;
+        }
+    ]]>
+    </fx:Script>
+	
+	<s:List id="testTree1" height="100%" width="100%"
+		labelField="@label" >
+        <s:itemRenderer>
+            <fx:Component>
+                <s:ItemRenderer dataChange="update()">
+                    <fx:Script>
+                        import spark.components.List;
+						import com.thinkloop.flex4.components.sparkTreeClasses.XMLLinearIList;
+                        private function update():void
+                        {
+                            disclosure.visible = XML(data).children().length() > 0;
+                            disclosure.selected = XMLLinearIList(List(owner).dataProvider).openNodes.indexOf(XML(data)) != -1;
+                            spacer.width = XMLLinearIList(List(owner).dataProvider).getDepth(XML(data)) * 8;
+                        }
+                    </fx:Script>
+                    <s:layout>
+                        <s:HorizontalLayout />
+                    </s:layout>
+                    <s:Group id="spacer" />
+                    <s:ToggleButton id="disclosure" skinClass="com.thinkloop.flex4.components.sparkTreeClasses.DisclosureSkin"
+                        click="disclosure.selected ? 
+                                XMLLinearIList(List(owner).dataProvider).openNode(XML(data)) :
+                                XMLLinearIList(List(owner).dataProvider).closeNode(XML(data))" />
+                    <s:Label id="labelDisplay" />
+                </s:ItemRenderer>
+            </fx:Component>
+        </s:itemRenderer>
+    </s:List>
+
+</s:Application>

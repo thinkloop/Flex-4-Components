@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+	
+	alpha.disabledStates="0.5">
+	
+	<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * META DATA
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<fx:Metadata>
+		<![CDATA[
+		[HostComponent("spark.components.ButtonBarButton")]
+		]]>
+	</fx:Metadata>	
+	
+	<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * PROPERTIES  
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<fx:Declarations>
+		<fx:String id="upColor">0xdadada</fx:String>
+		<fx:String id="upBGColor">0x616161</fx:String>		
+		
+		<fx:String id="overColor">0xdadada</fx:String>
+		<fx:String id="overBGColor">0x414141</fx:String>
+		
+		<fx:String id="downColor">0xdfdfdf</fx:String>
+		<fx:String id="downBGColor">0x212121</fx:String>
+		
+		<fx:int id="fontSize">{ Math.max(6, int(0.4 * height)) }</fx:int>
+	</fx:Declarations>
+	
+	<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * STATES
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="down" stateGroups="downStates" />
+		<s:State name="disabled" stateGroups="disabledStates" />
+		<s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+		<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+		<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+		<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+	</s:states>
+	
+	<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* * VIEW
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<s:Rect top="0" bottom="0" left="0" right="0">
+		<s:fill>
+			<s:SolidColor id="bgFill" 
+						  color="{upBGColor}" color.over="{overBGColor}" color.down="{downBGColor}" color.selectedStates="{downBGColor}" 
+						  alpha="{getStyle('backgroundAlpha')}" />
+		</s:fill>	
+	</s:Rect>
+	
+	<s:Line left="0" top="0" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke  color="{getStyle('borderColor')}" alpha="{getStyle('borderAlpha')}" />
+		</s:stroke>
+	</s:Line>	
+	
+	<s:Label id="labelDisplay"
+			 paddingLeft="{int(fontSize * 0.9)}" paddingRight="{int(fontSize * 0.9)}" paddingTop="{int(fontSize * 0.2)}" paddingBottom="{int(fontSize  * 0.2)}"
+			 horizontalCenter="0" verticalCenter="0"
+			 textAlign="left" verticalAlign="middle"
+			 fontSize="{fontSize}"
+			 maxDisplayedLines="1" width="100%"
+			 color="{upColor}" color.over="{overColor}" color.down="{downColor}" color.selectedStates="{downColor}">
+		
+		<s:filters>
+			<s:DropShadowFilter distance="1" alpha="0.4" blurX="4" blurY="4" />
+		</s:filters>		
+	</s:Label>
+</s:SparkSkin>
